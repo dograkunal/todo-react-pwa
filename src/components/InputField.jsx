@@ -14,7 +14,8 @@ class InputField extends React.Component {
     handleValidation() {
         if (this.props.validations) {
             const { err } = this.state;
-            const { required, minLength, maxLength, name } = this.props.validations;
+            // maxLength, name 
+            const { required, minLength} = this.props.validations;
             if (required) {
                 if(!this.state.err.find(el=>el.include('Required')))
                 this.setState({
