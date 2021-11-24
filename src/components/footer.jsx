@@ -4,9 +4,9 @@ class Footer extends React.Component{
         return(
             <>
             <footer>
-                <h1>
+                {/* <h1>
                     This is my footer
-                </h1>
+                </h1> */}
             </footer>
             </>
         );
