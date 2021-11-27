@@ -3,25 +3,31 @@ import Button from '../components/button';
 import InputField from '../components/inputfield';
 import TextAreaField from '../components/textArea';
 import { useState } from 'react'
+
 function Main({ updateData }) {
     const [formFields, setformFields] = useState({
         task: '',
         taskDate: '',
         location: ''
     })
+
     const { task, taskDate, location } = formFields
     const isFormValid = () => {
         return task && taskDate && location
     }
+
+
     const submitHandler = () => {
         if (isFormValid()) {
             updateData(formFields);
         }
     }
-    const setFormData = (e) => {
-        setformFields({ ...formFields, [e.target.name]: e.target.value })
 
+    const setFormData = (e) => {
+        console.log({ [e.target.name]: e.target.value });
+        setformFields({ ...formFields, [e.target.name]: e.target.value })
     }
+
     return (
         <div className="card">
             <div className="main-task">

@@ -9,7 +9,6 @@ function App() {
   const [taskList, settaskList] = useState([]);
   const handleTaskUpdation = (vals) => {
     settaskList(taskList.concat([vals]));
-    debugger;
     console.log(taskList)
   }
   return (
