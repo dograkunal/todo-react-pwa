@@ -1,45 +1,66 @@
 import React from 'react';
-import InputField from '../components/InputField';
-import burger from '../assets/hamburger.jpg'
-class Main extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            userName: ''
+import Button from '../components/button';
+import InputField from '../components/inputfield';
+import TextAreaField from '../components/textArea';
+import { useState } from 'react'
+function Main({ updateData }) {
+    const [formFields, setformFields] = useState({
+        task: '',
+        taskDate: '',
+        location: ''
+    })
+    const { task, taskDate, location } = formFields
+    const isFormValid = () => {
+        return task && taskDate && location
+    }
+    const submitHandler = () => {
+        if (isFormValid()) {
+            updateData(formFields);
         }
     }
+    const setFormData = (e) => {
+        setformFields({ ...formFields, [e.target.name]: e.target.value })
 
-    updateUserName = (data) => {
-        console.log(data, 'data from user');
-        this.setState({ userName: data });
     }
-    render() {
-        return (
-            <>
-                <body>
-                    <div> <img className="main-image" src={burger} /> </div>
-                        {/* <InputField
-             placeholder="kunal Input Field"
-             usersValue ={(value)=>this.updateUserName(value)}
-             validations={{required:true,name:true,minLength:6,maxLength:30}}
-             type="text" />
-             <br />
-             <InputField
-             placeholder="Hritik Input Field"
-             usersValue ={(value)=>this.updateUserName(value)}
-             validations={{required:true,name:true,minLength:6,maxLength:30}}
-             type="date" />  
-             <InputField
-             placeholder="Tushar Input Field"
-             usersValue ={(value)=>this.updateUserName(value)}
-             validations={{required:true,name:true,minLength:6,maxLength:30}}
-            type="time" /> */}
-                </body>
-                <main>
-                </main>
-            </>
-        );
-    }
+    return (
+        <div className="card">
+            <div className="main-task">
+                <div className="form-field">
+                    <TextAreaField
+                        name="task"
+                        handleChange={setFormData}
+                        value={task}
+                        placeholder="enter the task"
+                    />
+                </div>
+            </div>
+            <div className="rest-task">
+                <div className="form-field">
+                    <InputField
+                        name="taskDate"
+                        type="date"
+                        value={taskDate}
+                        placeholder="enter date"
+                        minDate={true}
+                        handleChange={setFormData}
+                    />
+                </div>
+                <div className="form-field">
+                    <InputField
+                        name="location"
+                        type="text"
+                        placeholder="location"
+                        value={location}
+                        handleChange={setFormData}
+                    />
+                </div>
+            </div>
+            <div>
+                <Button disabled={!isFormValid()} clickHandler={() => submitHandler()} text="Add Task" />
+            </div>
+        </div>
+    )
 }
 
-export default Main;
+
+export default Main

@@ -1,20 +1,22 @@
-import React from 'react';
+import { useState } from 'react';
 
 import './App.css';
 import Header from './components/header';
-import Footer from './components/footer';
 import Main from './view/main';
-import MainMid from './components/mainMid';
-import Menu from './components/menu';
+import TaskList from './view/taskLists';
 
 function App() {
+  const [taskList, settaskList] = useState([]);
+  const handleTaskUpdation = (vals) => {
+    settaskList(taskList.concat([vals]));
+    debugger;
+    console.log(taskList)
+  }
   return (
     <>
-    <Header />
-    <Main />
-    <Footer />
-    <MainMid />
-    <Menu />
+      <Header />
+      <Main updateData={handleTaskUpdation} />
+      <TaskList taskList={taskList} />
     </>
   );
 }
